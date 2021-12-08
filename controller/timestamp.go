@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"time"
+	"witness-on-chain/lib/utils"
 	"witness-on-chain/model"
 
 	"github.com/gin-gonic/gin"
@@ -32,9 +33,9 @@ func SignTimestamp(ctx *gin.Context) {
 		Signatures: model.Signatures{
 			Rabin: model.Signature{
 				PublicKey: "",
-				Signature: hex.EncodeToString(sig), // SigBE
-				// Signature: hex.EncodeToString(utils.ReverseBytes(sig)), // SigLE
-				Padding: hex.EncodeToString(padding),
+				// Signature: hex.EncodeToString(sig), // SigBE
+				Signature: hex.EncodeToString(utils.ReverseBytes(sig)), // SigLE
+				Padding:   hex.EncodeToString(padding),
 			},
 		},
 	})

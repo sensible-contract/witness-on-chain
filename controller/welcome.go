@@ -1,8 +1,10 @@
 package controller
 
 import (
+	"encoding/hex"
 	"log"
 	"net/http"
+	"witness-on-chain/lib/utils"
 	"witness-on-chain/model"
 
 	"github.com/gin-gonic/gin"
@@ -14,7 +16,7 @@ func WitnessOnChain(ctx *gin.Context) {
 
 	ctx.JSON(http.StatusOK, model.Welcome{
 		PublicKey: model.PublicKey{
-			Rabin: rb.PubKeyHex,
+			Rabin: hex.EncodeToString(utils.ReverseBytes(rb.PubKey)),
 		},
 		Contact: "hi@witnessonchain.com",
 		Message: "Welcome to WitnessOnChain!",

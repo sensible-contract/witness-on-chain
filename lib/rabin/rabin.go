@@ -8,7 +8,6 @@ package rabin
 
 import (
 	"crypto/sha256"
-	"encoding/hex"
 	"math/big"
 )
 
@@ -32,7 +31,7 @@ type Rabin struct {
 	PQ *big.Int
 	QP *big.Int
 
-	PubKeyHex string
+	PubKey []byte
 }
 
 func (r *Rabin) Init(pString, qString string) {
@@ -43,7 +42,7 @@ func (r *Rabin) Init(pString, qString string) {
 
 	r.N = new(big.Int)
 	r.N.Mul(r.P, r.Q)
-	r.PubKeyHex = hex.EncodeToString(r.N.Bytes())
+	r.PubKey = r.N.Bytes()
 
 	r.ONE = new(big.Int).SetInt64(1)
 	r.TWO = new(big.Int).SetInt64(2)
